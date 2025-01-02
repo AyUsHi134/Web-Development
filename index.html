@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flex Direction</title>
-  
-  <style>
- .container{
-    display: flex;
-    gap: 10px;
-    justify-content: space-evenly;
-    background-color: lavender;
- }
-
- .one{
-    background-color: pink;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 50px;
-    flex-basis: 0;
-    flex-grow: 1;
-    flex-shrink: 0;
-
- }
-
-    </style>
-
+  <title>Personal Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div class="container">
-        <div class="one">first</div>
-        <div class="one">second</div>
-        <div class="one">third</div>
-        <div class="one">fourth</div>
-        
-        
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>Hi, I'm Ayushi Singh</h1>
+    <p>Web Developer | Robotics Educator | Tech Enthusiast</p>
+    <a href="#contact" class="btn">Contact Me</a>
+  </header>
+
+  <!-- Resume Section -->
+  <section id="resume">
+    <h2>Resume</h2>
+    <ul>
+      <li><strong>Education:</strong> B.Tech in Computer Science & Mechatronics</li>
+      <li><strong>Work:</strong> Robotics Teacher at BrightChamps</li>
+      <li><strong>Skills:</strong> Java, Spring Boot, React, HTML, CSS</li>
+    </ul>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project">
+      <h3>We Together</h3>
+      <p>A collaborative platform for communities.</p>
     </div>
+    <div class="project">
+      <h3>ShopEase</h3>
+      <p>An e-commerce store for everyday shopping needs.</p>
+    </div>
+  </section>
 
+  <!-- About Me Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I’m passionate about building innovative web solutions and teaching robotics. In my free time, I enjoy exploring new technologies and working on creative projects.</p>
+  </section>
 
-  
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: ayushi@example.com</p>
+    <p>Phone: +91-9876543210</p>
+  </section>
+
+  <footer>
+    <p>© 2024 Ayushi Singh. All rights reserved.</p>
+  </footer>
 </body>
-
 </html>
