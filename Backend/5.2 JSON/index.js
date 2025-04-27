@@ -32,7 +32,7 @@ app.post("/recipe", (req, res) => {
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
   switch(req.body.choice) {
     case "chicken":
-      data = JSON.parse(recipeJSON)[0];
+      data = JSON.parse(recipeJSON)[0];//parse is used to convert JSON string into JS object.
       break;
     case "beef":
       data = JSON.parse(recipeJSON)[1];
