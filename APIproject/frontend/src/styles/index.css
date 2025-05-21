@@ -69,3 +69,11 @@
   flex: 1 1 150px;
 }
 
+.card input[type='radio'] {
+  margin-right: 0.4rem;
+}
+
+.card label {
+  margin-right: 1rem;
+  font-size: 1rem;
+}
