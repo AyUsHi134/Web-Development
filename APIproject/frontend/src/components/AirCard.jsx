@@ -1,14 +1,16 @@
-// components/AirCard.jsx
 import React from 'react';
+import '../styles/index.css';
 
-const AirCard = ({ data }) => (
-  <div className="card">
-    <h2>Air Quality</h2>
-    <p>AQI: {data.main.aqi}</p>
-    <p>PM2.5: {data.components.pm2_5} µg/m³</p>
-    <p>PM10: {data.components.pm10} µg/m³</p>
-    <p>CO: {data.components.co} µg/m³</p>
-  </div>
-);
+const AirCard = ({ data }) => {
+  const aqi = data.list[0].main.aqi;
+  const quality = ['Good', 'Fair', 'Moderate', 'Poor', 'Very Poor'];
+
+  return (
+    <div className="card">
+      <h2>Air Quality</h2>
+      <p>AQI Index: {aqi} ({quality[aqi - 1]})</p>
+    </div>
+  );
+};
 
 export default AirCard;

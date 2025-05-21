@@ -1,0 +1,71 @@
+.app {
+  font-family: 'Segoe UI', sans-serif;
+  background-image: url('../assets/backgrounds/main-bg.png.jpg'); /* Update this path */
+  background-size: cover;
+  min-height: 100vh;
+  padding: 2rem;
+  color: #fff;
+}
+
+.header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #1e3c72;
+  color: white;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.title {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 1.1rem;
+  color: #dcdcdc;
+}
+
+
+.card {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  border-radius: 10px;
+  max-width: 800px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  color: white;
+}
+
+.card input {
+  padding: 0.6rem;
+  width: 60%;
+  margin-right: 0.5rem;
+  border-radius: 5px;
+  border: none;
+}
+
+.card button {
+  padding: 0.6rem 1rem;
+  background-color: #0dcaf0;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.forecast-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.forecast-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin: 0.5rem;
+  flex: 1 1 150px;
+}
+
