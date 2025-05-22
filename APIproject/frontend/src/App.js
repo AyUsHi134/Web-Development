@@ -9,6 +9,7 @@ import './styles/index.css';
 const App = () => {
   const [inputType, setInputType] = useState('city'); // 'city' or 'coords'
   const [city, setCity] = useState('');
+  const [zip, setZip] = useState('');
   const [coords, setCoords] = useState({ lat: '', lon: '' });
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
@@ -17,32 +18,40 @@ const App = () => {
   const handleSearch = async () => {
     try {
 
-      let lat, lon;
+      let lat = coords.lat;
+      let lon = coords.lon;
 
-      if (inputType === 'city') {
-      const weatherRes = await axios.get(`http://localhost:5000/api/weather?city=${city}`);
-      setWeatherData(weatherRes.data);
+      if (inputType === 'city' && city) {
+  const geoRes = await axios.get(`http://localhost:5001/api/geocode?city=${city}`);
+  console.log(geoRes);
+  if (geoRes.data.length === 0) throw new Error('City not found');
+  lat = geoRes.data[0].lat;
+  lon = geoRes.data[0].lon;
+} else if (inputType === 'zip' && zip) {
+  const geoRes = await axios.get(`http://localhost:5001/api/geocode?zip=${zip}`);
+  lat = geoRes.data.lat;
+  lon = geoRes.data.lon;
+}
 
-      const forecastRes = await axios.get(`http://localhost:5000/api/forecast?city=${city}`);
-      setForecastData(forecastRes.data);
-      
-      lat = weatherRes.data.coord.lat;
-        lon = weatherRes.data.coord.lon;
-      } else {
-        lat = coords.lat;
-        lon = coords.lon;
-
-        const weatherRes = await axios.get(`http://localhost:5000/api/weather?lat=${lat}&lon=${lon}`);
-        setWeatherData(weatherRes.data);
-
-        const forecastRes = await axios.get(`http://localhost:5000/api/forecast?lat=${lat}&lon=${lon}`);
-        setForecastData(forecastRes.data);
+      if (!lat || !lon) {
+        alert('Invalid coordinates or location data');
+        return;
       }
 
-      const airRes = await axios.get(`http://localhost:5000/api/air?lat=${lat}&lon=${lon}`);
+      // Save coordinates
+      setCoords({ lat, lon });
+
+      // Call your backend API with lat/lon
+      const weatherRes = await axios.get(`http://localhost:5001/api/weather?lat=${lat}&lon=${lon}`);
+      setWeatherData(weatherRes.data);
+
+      const forecastRes = await axios.get(`http://localhost:5001/api/forecast?lat=${lat}&lon=${lon}`);
+      setForecastData(forecastRes.data);
+
+      const airRes = await axios.get(`http://localhost:5001/api/air?lat=${lat}&lon=${lon}`);
       setAirData(airRes.data);
     } catch (err) {
-      alert('Error fetching data. Check input values.');
+      console.log(err)
     }
   };
 
@@ -50,46 +59,43 @@ const App = () => {
     <div className="app">
       <Header />
 
-      <div className="card">
-        <div style={{ marginBottom: '1rem' }}>
-          <label>
-            <input
-              type="radio"
-              value="city"
-              checked={inputType === 'city'}
-              onChange={() => setInputType('city')}
-            />{' '}
-            Enter City
-          </label>{' '}
-          <label>
-            <input
-              type="radio"
-              value="coords"
-              checked={inputType === 'coords'}
-              onChange={() => setInputType('coords')}
-            />{' '}
-            Enter Latitude & Longitude
-          </label>
-        </div>
+      <div className="input-section">
+        <label>Select Input Method: </label>
+        <select value={inputType} onChange={(e) => setInputType(e.target.value)}>
+          <option value="city">City Name</option>
+          <option value="zip">Zip Code</option>
+          <option value="coords">Latitude & Longitude</option>
+        </select>
 
-        {inputType === 'city' ? (
+        {inputType === 'city' && (
           <input
             type="text"
-            placeholder="Enter city name"
+            placeholder="Enter City Name"
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
-        ) : (
+        )}
+
+        {inputType === 'zip' && (
+          <input
+            type="text"
+            placeholder="Enter Zip Code"
+            value={zip}
+            onChange={(e) => setZip(e.target.value)}
+          />
+        )}
+
+        {inputType === 'coords' && (
           <>
             <input
               type="text"
-              placeholder="Enter latitude"
+              placeholder="Enter Latitude"
               value={coords.lat}
               onChange={(e) => setCoords({ ...coords, lat: e.target.value })}
             />
             <input
               type="text"
-              placeholder="Enter longitude"
+              placeholder="Enter Longitude"
               value={coords.lon}
               onChange={(e) => setCoords({ ...coords, lon: e.target.value })}
             />
@@ -107,5 +113,3 @@ const App = () => {
 };
 
 export default App;
-
-      
