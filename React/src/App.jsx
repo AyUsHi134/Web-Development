@@ -1,12 +1,10 @@
-import React  from 'react'
-import Temmperature from './components/TemperatureCalculator';
+import React  from 'react';
+import TemperatureCalculator from './components/TemperatureCalculator';
 
 function App() {
-  
-
   return (
-    <TemmperatureCalculus />
+    <TemperatureCalculator />
   )
 }
 
-export default App
+export default App;
